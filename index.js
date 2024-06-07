@@ -1,14 +1,6 @@
-//change made
-const http = require("http"); 
-//create a server object: 
-http 
-  .createServer(function (req, res) { 
-    res.write("<h1>Hello World!</h1>");  
-    //write a response to the client 
-     
-    res.end();  
-    //end the response 
-  }) 
-  .listen(8080);  
-//Server runs on localhost:8080 
-//edited file from vscode
+import {initializeApp} from 'firebase-admin/app';
+
+initializeApp({
+    credential: applicationDefault(),
+    databaseURL: 'https://grace-baptist-of-marrero-default-rtdb.firebaseio.com'
+});

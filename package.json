@@ -7,5 +7,9 @@
   },
   "author": "arachnida-apps",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "firebase": "^10.12.2",
+    "firebase-admin": "^12.1.1"
+  }
 }

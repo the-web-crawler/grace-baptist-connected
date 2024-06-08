@@ -3,7 +3,6 @@ import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";
 
 console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-console.log((await fetch(location.href)).url);
 fetch(process.env.GOOGLE_APPLICATION_CREDENTIALS).then(r => r.text())
 .then(t => {
     console.log("GOOGLE_APPLICATION_CREDENTIALS:", t);

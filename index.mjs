@@ -3,9 +3,10 @@ import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";
 
 console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+console.log((await fetch(location.href)).url);
 fetch(process.env.GOOGLE_APPLICATION_CREDENTIALS).then(r => r.text())
 .then(t => {
-    console.log(t);
+    console.log("GOOGLE_APPLICATION_CREDENTIALS:", t);
 });
 
 const app = initializeApp({
@@ -19,7 +20,6 @@ console.log("App should be registered.");
 const messaging = admin.messaging();
 
 console.log("Messaging:");
-console.log(messaging);
 
 // Create a notification message.
 const message = {
@@ -29,9 +29,6 @@ const message = {
     },
     token: 'dQ6Y3BkZJnVl7F3OaU3Y8I:APA91bH4j5O-PtX2Aqc0FpaHCekHzUf9hMH2TPGhYM3EsZSmQ_QIc4UgA67z6I2NWsRWqrniV9AJ2y6U3pFX8q4iCo7teUQ7Nn2eGSokco-OrBx1WQISP5JLtDlLsnSzcxfUCUgyi-65',
 };
-
-console.log("Message:");
-console.log(message);
 
 // Send the notification.
 messaging.send(message)

@@ -2,15 +2,18 @@ import admin from "firebase-admin";
 import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";
 
-console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
-
 const app = initializeApp({
     credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
     databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
 });
 
+console.log("App should be registered.");
+
 // Get the messaging service.
 const messaging = admin.messaging();
+
+console.log("Messaging:");
+console.log(messaging);
 
 // Create a notification message.
 const message = {
@@ -20,6 +23,9 @@ const message = {
     },
     token: 'dQ6Y3BkZJnVl7F3OaU3Y8I:APA91bH4j5O-PtX2Aqc0FpaHCekHzUf9hMH2TPGhYM3EsZSmQ_QIc4UgA67z6I2NWsRWqrniV9AJ2y6U3pFX8q4iCo7teUQ7Nn2eGSokco-OrBx1WQISP5JLtDlLsnSzcxfUCUgyi-65',
 };
+
+console.log("Message:");
+console.log(message);
 
 // Send the notification.
 messaging.send(message)

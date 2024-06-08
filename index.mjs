@@ -3,7 +3,7 @@ import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";
 
 const app = initializeApp({
-    credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+    credential: admin.credential.cert(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)),
     databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
 });
 

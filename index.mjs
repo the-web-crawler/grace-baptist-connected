@@ -5,10 +5,6 @@ import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";
 
 console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-fetch(process.env.GOOGLE_APPLICATION_CREDENTIALS).then(r => r.text())
-.then(t => {
-    console.log("GOOGLE_APPLICATION_CREDENTIALS:", t);
-});
 
 const app = initializeApp({
     credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),

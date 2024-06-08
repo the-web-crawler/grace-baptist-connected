@@ -1,3 +1,5 @@
+console.log("Ok, the file at least ran.");
+
 import admin from "firebase-admin";
 import {initializeApp} from 'firebase-admin/app';
 import {getAuth} from "firebase-admin/auth";

@@ -1,16 +1,9 @@
+console.log("App ran")
+console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+
 import admin from "firebase-admin";
 import {initializeApp} from 'firebase-admin/app';
 // import {getAuth} from "firebase-admin/auth";
-
-import {
-    // getDatabase,
-    ref,
-    // set,
-    get,
-    // push,
-    child,
-    // update
-} from "firebase/database";
 
 const app = initializeApp({
     credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
@@ -21,7 +14,8 @@ const app = initializeApp({
 const messaging = admin.messaging();
 const db = admin.database();
 
-const subUsers = Object.keys((await get(child(ref(db), "/subscribed"))).val());
+const subUsers = Object.keys((await db.ref("subscribed").once("value")).val());
+console.log(subUsers)
 
 subUsers.forEach(user => {
     const message = {

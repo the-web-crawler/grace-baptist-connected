@@ -1,4 +1,4 @@
-console.log("Notifying tokens");
+console.log("Notifying tokens...");
 
 import admin from "firebase-admin";
 import {initializeApp} from 'firebase-admin/app';
@@ -14,7 +14,7 @@ const messaging = admin.messaging();
 const db = admin.database();
 
 const subUsers = Object.keys((await db.ref("subscribed").once("value")).val());
-console.log(subUsers);
+// console.log(subUsers);
 
 const counter = {
     n: 0,
@@ -31,20 +31,19 @@ subUsers.forEach(async user => {
 
     const message = {
         token: user,
-        notification: {
-            title: 'My Notification Title',
-            body: 'My Notification Body',
-        },
+        data: {
+            time: String(new Date().getTime())
+        }
     };
 
     messaging.send(message)
         .then((response) => {
+            console.log("\x1b[32m%s\x1b[0m", "Notification successfully sent to " + user);
             counter.count();
-            console.log("\x1b[32m%s\x1b[0m", "Notification successfully sent to", user);
         })
         .catch((error) => {
-            counter.count();
             console.warn("Notification failed to send to", user);
+            counter.count();
         });
 });
 

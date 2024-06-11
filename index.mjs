@@ -42,8 +42,22 @@ subUsers.forEach(async user => {
             counter.count();
         })
         .catch((error) => {
-            console.warn("Notification failed to send to", user);
-            counter.count();
+            const sendWarning = () => {
+                console.warn("Notification failed to send to", user);
+            }
+            switch (error.code) {
+                case "messaging/registration-token-not-registered":
+                    db.ref("subscribed/" + message.token).set(null).then(() => {
+                        sendWarning();
+                        console.log("Token removed");
+                        counter.count();
+                    });
+                    break;
+                default:
+                    sendWarning();
+                    console.error(error.code);
+                    counter.count();
+            }
         });
 });
 

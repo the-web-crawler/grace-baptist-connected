@@ -65,15 +65,10 @@ const counter = {
     count: function (n = -1) {
         this.n += n;
         if (this.n === 0) {
-            const timeCompleted = new Date(new Date().getTime() - startTime);
-            timeCompleted.setHours(0);
+            const secs = Math.round((new Date().getTime() - startTime) / 1000);
+            let out = secs >= 60 ? Math.floor(secs / 60) + "m" + (secs % 60 === 0 ? "" : ", " + secs % 60 + "s") : secs + "s";
             console.log("");
-            console.log("Process completed in", timeCompleted.toLocaleTimeString("en-US", {
-                hour12: false,
-                hour: "numeric",
-                minute: "2-digit",
-                second: "2-digit"
-            }));
+            console.log("Process completed in", out);
             process.exit(0);
         }
     }

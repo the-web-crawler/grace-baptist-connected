@@ -111,13 +111,13 @@ for (const userToken of subUsers) {
             if (thisAnn.data.lastIconUrl) opts.image = thisAnn.data.lastIconUrl;
             if (thisAnn.data.desc) opts.body = thisAnn.data.desc;
 
-            const sendNotif = () => {
+            const sendNotif = (rem) => {
                 counter.count(1);
                 notifSent = true;
                 const message = {
                     token: userToken,
                     notification: {
-                        title: `${isEvent ? "New Event" : "Announcement"}${thisAnn.data.title ? ": " + thisAnn.data.title : ""}`,
+                        title: `${rem || (isEvent ? "New Event" : "Announcement")}${thisAnn.data.title ? ": " + thisAnn.data.title : ""}`,
                         body: opts.body || ""
                     },
                     data: {
@@ -164,7 +164,7 @@ for (const userToken of subUsers) {
                         nextDate = new Date(thisDate.from).getTime();
                     }
                     if (nextDate && !(nextDate - user.docs[thisAnn.doc.id].last <= user.reminder) && nextDate - startTime <= user.reminder) {
-                        sendNotif(user.docs[thisAnn.doc.id]);
+                        sendNotif("Reminder");
                     } else {
                         logNotSending();
                     }
